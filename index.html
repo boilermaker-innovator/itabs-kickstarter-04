@@ -26,20 +26,7 @@
             min-height: 100vh;
             padding: 20px 15px 60px;
         }
-        .snowflake {
-            position: fixed;
-            color: #fff;
-            opacity: 0.7;
-            pointer-events: none;
-            animation: fall linear infinite;
-            z-index: 0;
-            text-shadow: 0 0 5px rgba(0,0,0,0.1);
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10vh) rotate(0deg); }
-            100% { transform: translateY(110vh) rotate(360deg); }
-        }
-        .page-header { text-align: center; margin-bottom: 25px; position: relative; z-index: 1; }
+        .page-header { text-align: center; margin-bottom: 25px; }
         .page-header h1 { font-size: 1.9em; font-weight: 700; color: var(--xmas-red); margin-bottom: 6px; }
         .page-header h1 span { color: var(--xmas-green); }
         .page-header p { color: var(--text-mid); font-size: 1em; }
@@ -50,8 +37,6 @@
             max-width: 500px;
             margin: 0 auto 20px;
             box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-            position: relative;
-            z-index: 1;
         }
         .section-box h3 {
             color: var(--xmas-green);
@@ -79,10 +64,8 @@
         .form-group input:focus, .form-group textarea:focus {
             outline: none;
             border-color: var(--xmas-red);
-            box-shadow: 0 0 0 3px rgba(196, 30, 58, 0.1);
         }
         .form-group textarea { resize: vertical; min-height: 100px; }
-        .form-group .hint { font-size: 0.78em; color: var(--text-light); margin-top: 6px; }
 
 ```
     .upload-btn {
@@ -96,12 +79,7 @@
         font-weight: 600;
         font-family: inherit;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
     }
-    .upload-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(196,30,58,0.3); }
     
     .photo-thumbs {
         display: flex;
@@ -111,74 +89,46 @@
         margin-top: 16px;
     }
     .photo-thumb {
-        width: 70px;
-        height: 70px;
-        border-radius: 12px;
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
         overflow: hidden;
-        position: relative;
         background: #f0f0f0;
         border: 2px solid var(--border-light);
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
     }
-    .photo-thumb.filled { border-color: var(--xmas-green); }
-    .photo-thumb.uploading { border-color: var(--xmas-red); }
+    .photo-thumb.has-photo { border-color: var(--xmas-green); }
     .photo-thumb img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
-    .photo-thumb .remove-btn {
-        position: absolute;
-        top: -8px;
-        right: -8px;
-        width: 24px;
-        height: 24px;
-        background: var(--xmas-red);
-        color: white;
-        border: 2px solid white;
-        border-radius: 50%;
-        font-size: 14px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 5;
-    }
-    .photo-thumb .placeholder {
+    .photo-thumb .num {
         color: var(--text-light);
         font-weight: 600;
-        font-size: 1.1em;
     }
-    
-    .spinner {
-        width: 24px;
-        height: 24px;
-        border: 3px solid rgba(196,30,58,0.2);
-        border-top-color: var(--xmas-red);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-    }
-    .spinner-white {
+    .photo-thumb .spin {
         width: 20px;
         height: 20px;
-        border: 3px solid rgba(255,255,255,0.3);
-        border-top-color: white;
+        border: 2px solid #ddd;
+        border-top-color: var(--xmas-red);
         border-radius: 50%;
         animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     
-    .upload-status {
+    .status-text {
         text-align: center;
         margin-top: 12px;
         font-size: 0.85em;
         color: var(--text-mid);
-        min-height: 20px;
+        min-height: 24px;
     }
-    .upload-status.error { color: #dc2626; }
-    .upload-status.success { color: var(--xmas-green); }
+    .status-text.error { color: #dc2626; }
+    .status-text.success { color: var(--xmas-green); }
     
     .generate-btn {
         width: 100%;
@@ -191,68 +141,40 @@
         font-weight: 600;
         font-family: inherit;
         cursor: pointer;
-        box-shadow: 0 4px 15px rgba(26, 95, 42, 0.3);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
     }
-    .generate-btn:hover { transform: translateY(-2px); }
-    .generate-btn:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+    .generate-btn:disabled { opacity: 0.6; }
     
-    .status-msg {
-        padding: 12px 16px;
+    .result-msg {
+        padding: 12px;
         border-radius: 10px;
         margin-top: 14px;
         font-size: 0.9em;
         display: none;
     }
-    .status-msg.show { display: block; }
-    .status-msg.success { background: #d1fae5; color: #065f46; }
-    .status-msg.error { background: #fee2e2; color: #991b1b; }
+    .result-msg.show { display: block; }
+    .result-msg.success { background: #d1fae5; color: #065f46; }
+    .result-msg.error { background: #fee2e2; color: #991b1b; }
     
     .footer { text-align: center; padding: 25px; color: var(--text-light); font-size: 0.85em; }
     .footer a { color: var(--xmas-green); text-decoration: none; }
-    
-    .toggle-url {
-        font-size: 0.85em;
-        color: var(--xmas-red);
-        cursor: pointer;
-        text-align: center;
-        margin-top: 16px;
-        text-decoration: underline;
-    }
-    .url-inputs { display: none; margin-top: 12px; }
-    .url-inputs.show { display: block; }
-    .url-inputs input {
-        width: 100%;
-        padding: 10px 12px;
-        border: 2px solid var(--border-light);
-        border-radius: 10px;
-        font-size: 14px;
-        margin-bottom: 8px;
-    }
 </style>
 ```
 
 </head>
 <body>
-    <div id="snowflakes"></div>
+    <div class="page-header">
+        <h1>🎄 iTabs <span>Christmas</span></h1>
+        <p>Create your Christmas photo story</p>
+    </div>
 
 ```
-<div class="page-header">
-    <h1>🎄 iTabs <span>Christmas</span> Generator</h1>
-    <p>Fill in the details, generate your iTabs!</p>
-</div>
-
 <div class="section-box">
-    <h3>🏢 Company Details</h3>
+    <h3>🏢 Company Name</h3>
     <div class="form-group">
-        <label>Company Name</label>
         <input type="text" id="companyName" placeholder="e.g. Mayfield Industries">
     </div>
     <div class="form-group">
-        <label>Tagline / Slogan (optional)</label>
+        <label>Tagline (optional)</label>
         <input type="text" id="tagline" placeholder="e.g. Switch On with Mayfield">
     </div>
 </div>
@@ -260,78 +182,60 @@
 <div class="section-box">
     <h3>📷 Photos</h3>
     
-    <input type="file" id="fileInput" accept="image/*" multiple style="display:none">
-    <button type="button" class="upload-btn" id="uploadBtn" onclick="document.getElementById('fileInput').click()">
-        📱 Select Photos from Phone
+    <input type="file" id="photoInput" accept="image/*" multiple style="display:none">
+    <button type="button" class="upload-btn" onclick="document.getElementById('photoInput').click()">
+        📱 Select Photos
     </button>
     
-    <div class="photo-thumbs" id="photoThumbs">
-        <div class="photo-thumb" id="thumb0"><span class="placeholder">1</span></div>
-        <div class="photo-thumb" id="thumb1"><span class="placeholder">2</span></div>
-        <div class="photo-thumb" id="thumb2"><span class="placeholder">3</span></div>
-        <div class="photo-thumb" id="thumb3"><span class="placeholder">4</span></div>
-        <div class="photo-thumb" id="thumb4"><span class="placeholder">5</span></div>
+    <div class="photo-thumbs">
+        <div class="photo-thumb" id="t0"><span class="num">1</span></div>
+        <div class="photo-thumb" id="t1"><span class="num">2</span></div>
+        <div class="photo-thumb" id="t2"><span class="num">3</span></div>
+        <div class="photo-thumb" id="t3"><span class="num">4</span></div>
+        <div class="photo-thumb" id="t4"><span class="num">5</span></div>
     </div>
     
-    <div class="upload-status" id="uploadStatus"></div>
-    
-    <div class="toggle-url" onclick="document.getElementById('urlInputs').classList.toggle('show')">
-        Or paste image URLs instead ▾
-    </div>
-    <div class="url-inputs" id="urlInputs">
-        <input type="url" id="url0" placeholder="Image 1 URL..." oninput="handleUrlPaste(0)">
-        <input type="url" id="url1" placeholder="Image 2 URL..." oninput="handleUrlPaste(1)">
-        <input type="url" id="url2" placeholder="Image 3 URL..." oninput="handleUrlPaste(2)">
-        <input type="url" id="url3" placeholder="Image 4 URL..." oninput="handleUrlPaste(3)">
-        <input type="url" id="url4" placeholder="Image 5 URL..." oninput="handleUrlPaste(4)">
-    </div>
+    <div class="status-text" id="status"></div>
 </div>
 
 <div class="section-box">
     <h3>💬 Christmas Message</h3>
     <div class="form-group">
-        <label>Main Christmas Message</label>
-        <textarea id="mainMessage" placeholder="e.g. From everyone at Mayfield Industries - Merry Christmas and a safe New Year! Here's to 2025!"></textarea>
+        <textarea id="mainMessage" placeholder="e.g. Merry Christmas from everyone at Mayfield! Here's to 2025!"></textarea>
     </div>
 </div>
 
 <div class="section-box">
     <h3>👥 Who's In The Photos</h3>
     <div class="form-group">
-        <label>Describe the people (names, roles, fun details)</label>
-        <textarea id="whoIsHere" placeholder="e.g. That's Ben from fabrication who's been here 25 years. Tommy the supervisor keeping an eye on everyone..."></textarea>
+        <textarea id="whoIsHere" placeholder="e.g. Ben from fabrication, Tommy the supervisor, Karen from accounts..."></textarea>
     </div>
 </div>
 
 <div class="section-box">
     <h3>📖 The Story</h3>
     <div class="form-group">
-        <label>What happened at the party?</label>
-        <textarea id="theStory" placeholder="e.g. First time the Perth and Adelaide crews got together! Someone rigged up fairy lights on a switchboard..."></textarea>
+        <textarea id="theStory" placeholder="e.g. First time the whole crew got together since 2019..."></textarea>
     </div>
 </div>
 
 <div class="section-box">
     <h3>⭐ Best Moment</h3>
     <div class="form-group">
-        <label>The highlight or funniest moment</label>
-        <textarea id="bestMoment" placeholder="e.g. When the lights went out and every sparkie pulled out their phone torch at the same time..."></textarea>
+        <textarea id="bestMoment" placeholder="e.g. When Dave did karaoke to Working Class Man..."></textarea>
     </div>
 </div>
 
 <div class="section-box">
     <h3>🎁 Special Thanks</h3>
     <div class="form-group">
-        <label>Thank you message</label>
-        <textarea id="thanks" placeholder="e.g. Massive thanks to everyone who makes this company great. Have a safe Christmas!"></textarea>
+        <textarea id="thanks" placeholder="e.g. Thanks to everyone who made it a great night!"></textarea>
     </div>
 </div>
 
 <div class="section-box">
-    <button class="generate-btn" id="generateBtn" onclick="generateiTabs()">
-        <span id="btnText">🎄 Generate My iTabs</span>
-    </button>
-    <div class="status-msg" id="statusMsg"></div>
+    <button class="generate-btn" id="genBtn" onclick="generate()">🎄 Generate iTabs</button>
+    <div class="result-msg" id="result"></div>
 </div>
 
 <div class="footer">
@@ -339,300 +243,153 @@
 </div>
 
 <script>
-    const IMGBB_API_KEY = '59cd5b2935b5b01bc744b5b0a1d26ee0';
-    let photoUrls = ['', '', '', '', ''];
-    let uploading = 0;
+    var IMGBB_KEY = '59cd5b2935b5b01bc744b5b0a1d26ee0';
+    var photoUrls = [];
+    var uploadsInProgress = 0;
 
-    // Snowflakes
-    (function(){
-        const c = document.getElementById('snowflakes');
-        for(let i = 0; i < 20; i++) {
-            const s = document.createElement('div');
-            s.className = 'snowflake';
-            s.textContent = '❄';
-            s.style.left = Math.random() * 100 + 'vw';
-            s.style.animationDuration = (Math.random() * 6 + 6) + 's';
-            s.style.animationDelay = Math.random() * 6 + 's';
-            s.style.fontSize = (Math.random() * 0.8 + 0.6) + 'rem';
-            c.appendChild(s);
-        }
-    })();
-
-    // File input handler
-    document.getElementById('fileInput').addEventListener('change', function(e) {
-        var files = [];
-        for (var i = 0; i < Math.min(e.target.files.length, 5); i++) {
-            files.push(e.target.files[i]);
+    document.getElementById('photoInput').onchange = function(e) {
+        var files = e.target.files;
+        if (!files || files.length === 0) return;
+        
+        photoUrls = [];
+        uploadsInProgress = 0;
+        
+        // Reset thumbs
+        for (var i = 0; i < 5; i++) {
+            document.getElementById('t' + i).innerHTML = '<span class="num">' + (i+1) + '</span>';
+            document.getElementById('t' + i).className = 'photo-thumb';
         }
         
-        if (files.length === 0) return;
+        var count = Math.min(files.length, 5);
+        document.getElementById('status').textContent = 'Uploading ' + count + ' photo(s)...';
+        document.getElementById('status').className = 'status-text';
         
-        // Clear existing
-        photoUrls = ['', '', '', '', ''];
-        for (var j = 0; j < 5; j++) {
-            updateThumb(j, '', false);
+        for (var i = 0; i < count; i++) {
+            uploadPhoto(files[i], i);
         }
+    };
+
+    function uploadPhoto(file, idx) {
+        uploadsInProgress++;
         
-        // Upload each file
-        for (var k = 0; k < files.length; k++) {
-            uploadFile(files[k], k);
-        }
-    });
-
-    function updateThumb(index, url, isUploading) {
-        const thumb = document.getElementById('thumb' + index);
+        // Show spinner
+        document.getElementById('t' + idx).innerHTML = '<div class="spin"></div>';
         
-        if (isUploading) {
-            thumb.innerHTML = '<div class="spinner"></div>';
-            thumb.className = 'photo-thumb uploading';
-        } else if (url) {
-            thumb.innerHTML = '<img src="' + url + '"><button class="remove-btn" onclick="removePhoto(' + index + ', event)">×</button>';
-            thumb.className = 'photo-thumb filled';
-        } else {
-            thumb.innerHTML = '<span class="placeholder">' + (index + 1) + '</span>';
-            thumb.className = 'photo-thumb';
-        }
-    }
-
-    function setStatus(msg, type) {
-        const el = document.getElementById('uploadStatus');
-        el.textContent = msg;
-        el.className = 'upload-status' + (type ? ' ' + type : '');
-    }
-
-    function removePhoto(index, event) {
-        if (event) event.stopPropagation();
-        photoUrls[index] = '';
-        updateThumb(index, '', false);
-    }
-
-    function handleUrlPaste(index) {
-        const url = document.getElementById('url' + index).value.trim();
-        photoUrls[index] = url;
-        updateThumb(index, url, false);
-    }
-
-    function uploadFile(file, index) {
-        console.log('Starting upload for index:', index);
-        uploading++;
-        updateThumb(index, '', true);
-        setStatus('Uploading ' + uploading + ' photo(s)...');
-
-        var reader = new FileReader();
+        // Create form data with file directly
+        var fd = new FormData();
+        fd.append('key', IMGBB_KEY);
+        fd.append('image', file);
         
-        reader.onload = function(e) {
-            var base64 = e.target.result.split(',')[1];
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'https://api.imgbb.com/1/upload', true);
+        
+        xhr.onload = function() {
+            uploadsInProgress--;
             
-            var formData = new FormData();
-            formData.append('key', IMGBB_API_KEY);
-            formData.append('image', base64);
-
-            fetch('https://api.imgbb.com/1/upload', {
-                method: 'POST',
-                body: formData
-            })
-            .then(function(response) { return response.json(); })
-            .then(function(data) {
-                uploading--;
-                if (data.success) {
-                    photoUrls[index] = data.data.url;
-                    updateThumb(index, data.data.url, false);
+            try {
+                var resp = JSON.parse(xhr.responseText);
+                if (resp.success && resp.data && resp.data.url) {
+                    photoUrls[idx] = resp.data.url;
+                    document.getElementById('t' + idx).innerHTML = '<img src="' + resp.data.url + '">';
+                    document.getElementById('t' + idx).className = 'photo-thumb has-photo';
                 } else {
-                    updateThumb(index, '', false);
-                    setStatus('Upload failed', 'error');
+                    document.getElementById('t' + idx).innerHTML = '<span class="num">X</span>';
+                    document.getElementById('status').textContent = 'Upload failed';
+                    document.getElementById('status').className = 'status-text error';
                 }
-                checkUploadsDone();
-            })
-            .catch(function(err) {
-                uploading--;
-                updateThumb(index, '', false);
-                setStatus('Upload error', 'error');
-                checkUploadsDone();
-            });
-        };
-        
-        reader.onerror = function() {
-            uploading--;
-            updateThumb(index, '', false);
-            setStatus('Could not read file', 'error');
-            checkUploadsDone();
-        };
-        
-        reader.readAsDataURL(file);
-    }
-    
-    function checkUploadsDone() {
-        if (uploading === 0) {
-            var count = photoUrls.filter(function(u) { return u; }).length;
-            if (count > 0) {
-                setStatus('✅ ' + count + ' photo(s) uploaded!', 'success');
+            } catch(err) {
+                document.getElementById('t' + idx).innerHTML = '<span class="num">X</span>';
             }
-        } else {
-            setStatus('Uploading ' + uploading + ' photo(s)...');
+            
+            checkDone();
+        };
+        
+        xhr.onerror = function() {
+            uploadsInProgress--;
+            document.getElementById('t' + idx).innerHTML = '<span class="num">X</span>';
+            document.getElementById('status').textContent = 'Network error';
+            document.getElementById('status').className = 'status-text error';
+            checkDone();
+        };
+        
+        xhr.send(fd);
+    }
+
+    function checkDone() {
+        if (uploadsInProgress === 0) {
+            var good = photoUrls.filter(function(u) { return u; }).length;
+            if (good > 0) {
+                document.getElementById('status').textContent = '✅ ' + good + ' photo(s) ready!';
+                document.getElementById('status').className = 'status-text success';
+            }
         }
     }
 
-    function escapeHtml(t) {
+    function esc(t) {
         if (!t) return '';
-        const d = document.createElement('div');
+        var d = document.createElement('div');
         d.textContent = t;
         return d.innerHTML;
     }
 
-    function showMsg(msg, type) {
-        const el = document.getElementById('statusMsg');
-        el.textContent = msg;
-        el.className = 'status-msg show ' + type;
-    }
-
-    function generateiTabs() {
-        const companyName = document.getElementById('companyName').value || 'Our Company';
-        const tagline = document.getElementById('tagline').value || '';
-        const mainMessage = document.getElementById('mainMessage').value || 'Merry Christmas and Happy New Year!';
-        const whoIsHere = document.getElementById('whoIsHere').value || '';
-        const theStory = document.getElementById('theStory').value || '';
-        const bestMoment = document.getElementById('bestMoment').value || '';
-        const thanks = document.getElementById('thanks').value || '';
-
-        const photos = photoUrls.filter(url => url && url.trim());
-
+    function generate() {
+        var photos = photoUrls.filter(function(u) { return u; });
+        
         if (photos.length === 0) {
-            showMsg('Please add at least one photo', 'error');
+            document.getElementById('result').textContent = 'Please add at least one photo';
+            document.getElementById('result').className = 'result-msg show error';
             return;
         }
-
-        if (uploading > 0) {
-            showMsg('Please wait for photos to finish uploading', 'error');
+        
+        if (uploadsInProgress > 0) {
+            document.getElementById('result').textContent = 'Wait for uploads to finish';
+            document.getElementById('result').className = 'result-msg show error';
             return;
         }
+        
+        var company = document.getElementById('companyName').value || 'Our Team';
+        var tagline = document.getElementById('tagline').value || '';
+        var msg = document.getElementById('mainMessage').value || 'Merry Christmas!';
+        var who = document.getElementById('whoIsHere').value || '';
+        var story = document.getElementById('theStory').value || '';
+        var best = document.getElementById('bestMoment').value || '';
+        var thx = document.getElementById('thanks').value || '';
 
-        const btn = document.getElementById('generateBtn');
-        const btnText = document.getElementById('btnText');
-        btn.disabled = true;
-        btnText.innerHTML = '<span class="spinner-white"></span> Generating...';
+        var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(company) + ' Christmas 2024</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Poppins,sans-serif;background:linear-gradient(180deg,#e8f5e9,#f7f8fa);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.12);max-width:420px;width:100%}.slideshow{position:relative;width:100%;height:300px;background:#c41e3a;overflow:hidden}.slides{display:flex;height:100%;transition:transform .4s}.slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center}.slide img{max-width:100%;max-height:100%;object-fit:cover;width:100%}.dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px}.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;border:2px solid #fff}.dot.on{background:#fff}.ibtn{position:absolute;bottom:18px;right:18px;width:54px;height:54px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);border:3px solid #1a5f2a}.content{padding:20px;text-align:center}.content h2{color:#1a1a1a;font-size:1.2em}.content p{color:#718096;font-size:.85em}.popup{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:15px}.popup.on{display:flex}.box{background:#fff;border-radius:24px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}.head{background:#c41e3a;color:#fff;padding:26px 22px;text-align:center;position:relative}.head h3{font-size:1.3em}.close{position:absolute;top:14px;right:14px;width:34px;height:34px;background:rgba(255,255,255,.2);border:none;border-radius:50%;color:#fff;font-size:22px;cursor:pointer}.body{padding:24px}.msgbox{background:#e8f5e9;border-left:4px solid #1a5f2a;padding:18px;margin-bottom:20px;border-radius:0 12px 12px 0}.msgbox p{font-size:1.1em;font-weight:600;color:#1a1a1a}.sec{margin-bottom:20px}.sec h4{color:#1a5f2a;font-size:1em;margin-bottom:8px}.sec p{color:#4a5568;line-height:1.6}.foot{text-align:center;padding:15px;font-size:.8em;color:#718096;border-top:1px solid #eee}.foot a{color:#1a5f2a;text-decoration:none}</style></head><body><div class="card"><div class="slideshow" id="ss"><div class="slides" id="sl">';
+        
+        for (var i = 0; i < photos.length; i++) {
+            html += '<div class="slide"><img src="' + photos[i] + '"></div>';
+        }
+        
+        html += '</div><div class="dots">';
+        for (var i = 0; i < photos.length; i++) {
+            html += '<div class="dot' + (i===0?' on':'') + '" onclick="go(' + i + ')"></div>';
+        }
+        html += '</div><div class="ibtn" onclick="openP()">🎄</div></div><div class="content"><h2>' + esc(company) + ' Christmas 2024! 🎄</h2><p>Swipe • Tap 🎄 for stories</p></div><div class="foot">Made with 🎄 <a href="https://itabs.ai">iTabs</a>' + (tagline ? ' | ' + esc(tagline) : '') + '</div></div>';
+        
+        html += '<div class="popup" id="pop" onclick="closeP(event)"><div class="box" onclick="event.stopPropagation()"><div class="head"><button class="close" onclick="closeP()">×</button><h3>' + esc(company) + ' Christmas 🎄</h3></div><div class="body"><div class="msgbox"><p>' + esc(msg) + '</p></div>';
+        
+        if (who) html += '<div class="sec"><h4>👥 Who\'s Here</h4><p>' + esc(who) + '</p></div>';
+        if (story) html += '<div class="sec"><h4>📖 The Story</h4><p>' + esc(story) + '</p></div>';
+        if (best) html += '<div class="sec"><h4>⭐ Best Moment</h4><p>' + esc(best) + '</p></div>';
+        if (thx) html += '<div class="sec"><h4>🎁 Thanks</h4><p>' + esc(thx) + '</p></div>';
+        
+        html += '</div></div></div>';
+        
+        html += '<script>var c=0,n=' + photos.length + ';function go(i){c=i;document.getElementById("sl").style.transform="translateX(-"+c*100+"%)";var d=document.querySelectorAll(".dot");for(var j=0;j<d.length;j++)d[j].className=j===c?"dot on":"dot"}function next(){c=(c+1)%n;go(c)}function openP(){document.getElementById("pop").className="popup on"}function closeP(e){if(!e||e.target.id==="pop"||e.target.className.indexOf("close")>-1)document.getElementById("pop").className="popup"}setInterval(next,3500);var sx=0;document.getElementById("ss").ontouchstart=function(e){sx=e.touches[0].clientX};document.getElementById("ss").ontouchend=function(e){var d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>50){d>0?next():go((c-1+n)%n)}}<\/script></body></html>';
 
-        setTimeout(() => {
-            const html = generateHTML(companyName, tagline, mainMessage, whoIsHere, theStory, bestMoment, thanks, photos);
-
-            const blob = new Blob([html], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'itabs-christmas-' + companyName.toLowerCase().replace(/[^a-z0-9]+/g, '-') + '.html';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-
-            showMsg('✅ Downloaded! Share it anywhere.', 'success');
-            btn.disabled = false;
-            btnText.textContent = '🎄 Generate My iTabs';
-        }, 500);
+        var blob = new Blob([html], {type: 'text/html'});
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'itabs-christmas.html';
+        a.click();
+        
+        document.getElementById('result').textContent = '✅ Downloaded!';
+        document.getElementById('result').className = 'result-msg show success';
     }
-
-    function generateHTML(companyName, tagline, mainMessage, whoIsHere, theStory, bestMoment, thanks, photos) {
-        return `<!DOCTYPE html>
+</script>
 ```
 
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>${escapeHtml(companyName)} Christmas 2024</title>
-    <meta property="og:title" content="${escapeHtml(companyName)} Christmas 2024">
-    <meta property="og:description" content="${escapeHtml(mainMessage)}">
-    <meta property="og:image" content="${photos[0]}">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:Poppins,sans-serif;background:linear-gradient(180deg,#e8f5e9,#f7f8fa);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-        .snowflake{position:fixed;color:#fff;opacity:.7;pointer-events:none;animation:fall linear infinite;text-shadow:0 0 5px rgba(0,0,0,.1)}
-        @keyframes fall{0%{transform:translateY(-10vh) rotate(0)}to{transform:translateY(110vh) rotate(360deg)}}
-        .card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.12);max-width:420px;width:100%}
-        .slideshow{position:relative;width:100%;height:300px;background:linear-gradient(135deg,#c41e3a,#a01830);overflow:hidden}
-        .slides-track{display:flex;height:100%;transition:transform .4s}
-        .slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center}
-        .slide img{max-width:100%;max-height:100%;object-fit:cover;width:100%}
-        .dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
-        .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;border:2px solid #fff;transition:.3s}
-        .dot.active{background:#fff;transform:scale(1.25)}
-        .i-btn{position:absolute;bottom:18px;right:18px;width:54px;height:54px;background:#fff;color:#1a5f2a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);border:3px solid #1a5f2a;z-index:20}
-        .auto-ind{position:absolute;top:15px;left:15px;background:rgba(0,0,0,.4);color:#fff;padding:5px 12px;border-radius:20px;font-size:.75em;display:flex;align-items:center;gap:6px}
-        .pulse{width:8px;height:8px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite}
-        @keyframes pulse{0%,to{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
-        .content{padding:20px;text-align:center}
-        .content h2{color:#1a1a1a;font-size:1.2em;font-weight:600;margin-bottom:6px}
-        .content p{color:#718096;font-size:.85em}
-        .popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:15px}
-        .popup-overlay.active{display:flex}
-        .popup{background:#fff;border-radius:24px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;animation:slideUp .3s}
-        @keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
-        .popup-header{background:linear-gradient(135deg,#c41e3a,#a01830);color:#fff;padding:26px 22px;text-align:center;position:sticky;top:0}
-        .popup-header h3{font-size:1.35em;margin-bottom:4px}
-        .popup-header p{opacity:.9;font-size:.9em}
-        .close-btn{position:absolute;top:14px;right:14px;width:34px;height:34px;background:rgba(255,255,255,.2);border:none;border-radius:50%;color:#fff;font-size:22px;cursor:pointer}
-        .popup-body{padding:24px}
-        .msg-box{background:linear-gradient(135deg,#e8f5e9,#f0fff6);border-left:4px solid #1a5f2a;padding:18px 20px;margin-bottom:24px;border-radius:0 14px 14px 0}
-        .msg-text{font-size:1.1em;font-weight:600;color:#1a1a1a;line-height:1.5}
-        .section{margin-bottom:22px}
-        .section h4{color:#1a5f2a;font-size:1.05em;font-weight:600;margin-bottom:8px}
-        .section p{color:#4a5568;line-height:1.7;font-size:.95em}
-        .footer{text-align:center;padding:15px;font-size:.8em;color:#718096;border-top:1px solid #eee}
-        .footer a{color:#1a5f2a;text-decoration:none}
-    </style>
-</head>
-<body>
-    <div id="snow"></div>
-    <div class="card">
-        <div class="slideshow" id="ss">
-            <div class="auto-ind"><div class="pulse"></div><span>Auto</span></div>
-            <div class="slides-track" id="track">
-                ${photos.map(url => `<div class="slide"><img src="${url}"></div>`).join('')}
-            </div>
-            <div class="dots">
-                ${photos.map((_, i) => `<div class="dot${i === 0 ? ' active' : ''}" onclick="goTo(${i})"></div>`).join('')}
-            </div>
-            <div class="i-btn" onclick="openPopup()">🎄</div>
-        </div>
-        <div class="content">
-            <h2>${escapeHtml(companyName)} Christmas 2024! 🎄</h2>
-            <p>Swipe photos • Tap 🎄 for the stories</p>
-        </div>
-        <div class="footer">Made with 🎄 <a href="https://itabs.ai">iTabs</a>${tagline ? ' | ' + escapeHtml(tagline) : ''}</div>
-    </div>
-    <div class="popup-overlay" id="popup" onclick="closePopup(event)">
-        <div class="popup" onclick="event.stopPropagation()">
-            <div class="popup-header">
-                <button class="close-btn" onclick="closePopup()">×</button>
-                <h3>${escapeHtml(companyName)} Christmas 2024 🎄</h3>
-                <p>The stories behind the photos</p>
-            </div>
-            <div class="popup-body">
-                <div class="msg-box"><p class="msg-text">${escapeHtml(mainMessage)}</p></div>
-                ${whoIsHere ? `<div class="section"><h4>👥 Who's Here</h4><p>${escapeHtml(whoIsHere)}</p></div>` : ''}
-                ${theStory ? `<div class="section"><h4>📖 The Story</h4><p>${escapeHtml(theStory)}</p></div>` : ''}
-                ${bestMoment ? `<div class="section"><h4>⭐ Best Moment</h4><p>${escapeHtml(bestMoment)}</p></div>` : ''}
-                ${thanks ? `<div class="section"><h4>🎁 Thanks Legends</h4><p>${escapeHtml(thanks)}</p></div>` : ''}
-            </div>
-        </div>
-    </div>
-    <script>
-        let cur=0,intv;const total=${photos.length};
-        function goTo(i){cur=i;document.getElementById("track").style.transform="translateX(-"+cur*100+"%)";document.querySelectorAll(".dot").forEach((d,j)=>d.classList.toggle("active",j===cur))}
-        function next(){cur=(cur+1)%total;goTo(cur)}
-        function startAuto(){intv=setInterval(next,3500)}
-        function stopAuto(){clearInterval(intv)}
-        function openPopup(){document.getElementById("popup").classList.add("active");document.body.style.overflow="hidden";stopAuto()}
-        function closePopup(e){if(!e||e.target.id==="popup"||e.target.classList.contains("close-btn")){document.getElementById("popup").classList.remove("active");document.body.style.overflow="";startAuto()}}
-        document.addEventListener("keydown",e=>{if(e.key==="Escape")closePopup()});
-        let sx=0;document.getElementById("ss").addEventListener("touchstart",e=>sx=e.changedTouches[0].screenX);
-        document.getElementById("ss").addEventListener("touchend",e=>{const d=sx-e.changedTouches[0].screenX;if(Math.abs(d)>50)d>0?next():goTo((cur-1+total)%total)});
-        (function(){const c=document.getElementById("snow");for(let i=0;i<15;i++){const s=document.createElement("div");s.className="snowflake";s.textContent="❄";s.style.left=Math.random()*100+"vw";s.style.animationDuration=Math.random()*6+6+"s";s.style.animationDelay=Math.random()*6+"s";s.style.fontSize=Math.random()*.8+.6+"rem";c.appendChild(s)}})();
-        startAuto();
-    <\/script>
-</body>
-</html>`;
-        }
-    </script>
 </body>
 </html>
