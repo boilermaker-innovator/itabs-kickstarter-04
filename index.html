@@ -1,393 +1,130 @@
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>iTabs Christmas Generator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Mayfield Industries Christmas 2024 🎄</title>
+    <meta property="og:title" content="Mayfield Industries Christmas 2024 🎄">
+    <meta property="og:description" content="Merry Christmas from the Mayfield crew! Tap to discover the stories behind the photos.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?w=600">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --xmas-red: #c41e3a;
-            --xmas-red-dark: #a01830;
-            --xmas-green: #1a5f2a;
-            --xmas-green-light: #e8f5e9;
-            --text-dark: #1a1a1a;
-            --text-mid: #4a5568;
-            --text-light: #718096;
-            --bg-white: #ffffff;
-            --bg-grey: #f7f8fa;
-            --border-light: #e2e8f0;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(180deg, var(--xmas-green-light) 0%, var(--bg-grey) 30%);
-            min-height: 100vh;
-            padding: 20px 15px 60px;
-        }
-        .page-header { text-align: center; margin-bottom: 25px; }
-        .page-header h1 { font-size: 1.9em; font-weight: 700; color: var(--xmas-red); margin-bottom: 6px; }
-        .page-header h1 span { color: var(--xmas-green); }
-        .page-header p { color: var(--text-mid); font-size: 1em; }
-        .section-box {
-            background: var(--bg-white);
-            border-radius: 18px;
-            padding: 22px;
-            max-width: 500px;
-            margin: 0 auto 20px;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-        }
-        .section-box h3 {
-            color: var(--xmas-green);
-            font-size: 1.1em;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-        .form-group { margin-bottom: 18px; }
-        .form-group label {
-            display: block;
-            color: var(--text-dark);
-            font-size: 0.9em;
-            margin-bottom: 6px;
-            font-weight: 500;
-        }
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 12px 14px;
-            border: 2px solid var(--border-light);
-            border-radius: 12px;
-            font-size: 16px;
-            font-family: inherit;
-            background: var(--bg-white);
-        }
-        .form-group input:focus, .form-group textarea:focus {
-            outline: none;
-            border-color: var(--xmas-red);
-        }
-        .form-group textarea { resize: vertical; min-height: 100px; }
-
-```
-    .upload-btn {
-        width: 100%;
-        padding: 16px 24px;
-        background: linear-gradient(135deg, var(--xmas-red) 0%, var(--xmas-red-dark) 100%);
-        color: white;
-        border: none;
-        border-radius: 12px;
-        font-size: 1em;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-    }
-    
-    .photo-thumbs {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-        justify-content: center;
-        margin-top: 16px;
-    }
-    .photo-thumb {
-        width: 60px;
-        height: 60px;
-        border-radius: 10px;
-        overflow: hidden;
-        background: #f0f0f0;
-        border: 2px solid var(--border-light);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-    }
-    .photo-thumb.has-photo { border-color: var(--xmas-green); }
-    .photo-thumb img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .photo-thumb .num {
-        color: var(--text-light);
-        font-weight: 600;
-    }
-    .photo-thumb .spin {
-        width: 20px;
-        height: 20px;
-        border: 2px solid #ddd;
-        border-top-color: var(--xmas-red);
-        border-radius: 50%;
-        animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    
-    .status-text {
-        text-align: center;
-        margin-top: 12px;
-        font-size: 0.85em;
-        color: var(--text-mid);
-        min-height: 24px;
-    }
-    .status-text.error { color: #dc2626; }
-    .status-text.success { color: var(--xmas-green); }
-    
-    .generate-btn {
-        width: 100%;
-        padding: 16px 24px;
-        background: linear-gradient(135deg, var(--xmas-green) 0%, #145a24 100%);
-        color: white;
-        border: none;
-        border-radius: 14px;
-        font-size: 1.1em;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-    }
-    .generate-btn:disabled { opacity: 0.6; }
-    
-    .result-msg {
-        padding: 12px;
-        border-radius: 10px;
-        margin-top: 14px;
-        font-size: 0.9em;
-        display: none;
-    }
-    .result-msg.show { display: block; }
-    .result-msg.success { background: #d1fae5; color: #065f46; }
-    .result-msg.error { background: #fee2e2; color: #991b1b; }
-    
-    .footer { text-align: center; padding: 25px; color: var(--text-light); font-size: 0.85em; }
-    .footer a { color: var(--xmas-green); text-decoration: none; }
-</style>
-```
-
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Poppins,sans-serif;background:linear-gradient(180deg,#e8f5e9,#f7f8fa);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+        .snowflake{position:fixed;color:#fff;opacity:.7;pointer-events:none;animation:fall linear infinite;text-shadow:0 0 5px rgba(0,0,0,.1)}
+        @keyframes fall{0%{transform:translateY(-10vh) rotate(0)}to{transform:translateY(110vh) rotate(360deg)}}
+        .card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.12);max-width:420px;width:100%}
+        .slideshow{position:relative;width:100%;height:300px;background:linear-gradient(135deg,#c41e3a,#a01830);overflow:hidden}
+        .slides-track{display:flex;height:100%;transition:transform .4s}
+        .slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+        .slide img{max-width:100%;max-height:100%;object-fit:cover;width:100%}
+        .dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px;z-index:10}
+        .dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;border:2px solid #fff;transition:.3s}
+        .dot.active{background:#fff;transform:scale(1.25)}
+        .i-btn{position:absolute;bottom:18px;right:18px;width:54px;height:54px;background:#fff;color:#1a5f2a;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);border:3px solid #1a5f2a;z-index:20;transition:transform .2s}
+        .i-btn:hover{transform:scale(1.08)}
+        .auto-ind{position:absolute;top:15px;left:15px;background:rgba(0,0,0,.4);color:#fff;padding:5px 12px;border-radius:20px;font-size:.75em;display:flex;align-items:center;gap:6px}
+        .pulse{width:8px;height:8px;background:#fff;border-radius:50%;animation:pulse 1.5s infinite}
+        @keyframes pulse{0%,to{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+        .content{padding:20px;text-align:center}
+        .content h2{color:#1a1a1a;font-size:1.2em;font-weight:600;margin-bottom:6px}
+        .content p{color:#718096;font-size:.85em}
+        .popup-overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:15px}
+        .popup-overlay.active{display:flex}
+        .popup{background:#fff;border-radius:24px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;animation:slideUp .3s}
+        @keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+        .popup-header{background:linear-gradient(135deg,#c41e3a,#a01830);color:#fff;padding:26px 22px;text-align:center;position:sticky;top:0}
+        .popup-header h3{font-size:1.35em;margin-bottom:4px}
+        .popup-header p{opacity:.9;font-size:.9em}
+        .close-btn{position:absolute;top:14px;right:14px;width:34px;height:34px;background:rgba(255,255,255,.2);border:none;border-radius:50%;color:#fff;font-size:22px;cursor:pointer}
+        .popup-body{padding:24px}
+        .msg-box{background:linear-gradient(135deg,#e8f5e9,#f0fff6);border-left:4px solid #1a5f2a;padding:18px 20px;margin-bottom:24px;border-radius:0 14px 14px 0}
+        .msg-text{font-size:1.1em;font-weight:600;color:#1a1a1a;line-height:1.5}
+        .section{margin-bottom:22px}
+        .section h4{color:#1a5f2a;font-size:1.05em;font-weight:600;margin-bottom:8px}
+        .section p{color:#4a5568;line-height:1.7;font-size:.95em}
+        .footer{text-align:center;padding:15px;font-size:.8em;color:#718096;border-top:1px solid #eee}
+        .footer a{color:#1a5f2a;text-decoration:none}
+    </style>
 </head>
 <body>
-    <div class="page-header">
-        <h1>🎄 iTabs <span>Christmas</span></h1>
-        <p>Create your Christmas photo story</p>
+    <div id="snow"></div>
+    <div class="card">
+        <div class="slideshow" id="ss">
+            <div class="auto-ind"><div class="pulse"></div><span>Auto</span></div>
+            <div class="slides-track" id="track">
+                <div class="slide"><img src="https://images.unsplash.com/photo-1576919228236-a097c32a5cd4?w=600" alt="Party"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1543934638-bd2e138430c4?w=600" alt="Team"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=600" alt="Celebration"></div>
+                <div class="slide"><img src="https://images.unsplash.com/photo-1513885535751-8b9238bd345a?w=600" alt="Cheers"></div>
+            </div>
+            <div class="dots" id="dots">
+                <div class="dot active" onclick="goTo(0)"></div>
+                <div class="dot" onclick="goTo(1)"></div>
+                <div class="dot" onclick="goTo(2)"></div>
+                <div class="dot" onclick="goTo(3)"></div>
+            </div>
+            <div class="i-btn" onclick="openPopup()">🎄</div>
+        </div>
+        <div class="content">
+            <h2>Mayfield Industries Christmas 2024! ⚡🎄</h2>
+            <p>Swipe photos • Tap 🎄 for the stories</p>
+        </div>
+        <div class="footer">Made with 🎄 <a href="https://itabs.ai">iTabs</a> | Switch On with Mayfield</div>
     </div>
 
 ```
-<div class="section-box">
-    <h3>🏢 Company Name</h3>
-    <div class="form-group">
-        <input type="text" id="companyName" placeholder="e.g. Mayfield Industries">
+<div class="popup-overlay" id="popup" onclick="closePopup(event)">
+    <div class="popup" onclick="event.stopPropagation()">
+        <div class="popup-header">
+            <button class="close-btn" onclick="closePopup()">×</button>
+            <h3>Mayfield Christmas 2024 ⚡🎄</h3>
+            <p>The stories behind the photos</p>
+        </div>
+        <div class="popup-body">
+            <div class="msg-box">
+                <p class="msg-text">From everyone at Mayfield Industries - Merry Christmas and a safe, electrifying New Year! 80+ years of powering Australia, and it's all thanks to legends like you. Here's to 2025! ⚡🎉</p>
+            </div>
+            
+            <div class="section">
+                <h4>👥 Who's Here</h4>
+                <p>That's Ben from the fabrication team who's been here 25 years and still reckons he can outweld the apprentices. Tommy the supervisor keeping an eye on everyone (even at the Christmas party - old habits!). Karen from accounts who keeps everyone's timesheets in line (and brought her famous rum balls). And yes, that's the boss wearing a Christmas sweater with actual LEDs in it - very on-brand for a switchboard company! 😂</p>
+            </div>
+            
+            <div class="section">
+                <h4>📖 The Story</h4>
+                <p>The Henderson crew and the SA mob finally in the same room! Flew the Adelaide team over for this one. Someone rigged up a switchboard with fairy lights as the centrepiece - proper sparkie Christmas tree. The engineering team ran a "worst cable management" photo competition from past jobs. Let's just say some contractors should be very nervous. 📸⚡</p>
+            </div>
+            
+            <div class="section">
+                <h4>⭐ Best Moment</h4>
+                <p>When the lights went out halfway through the speeches and EVERY SINGLE SPARKIE pulled out their phone torch at the exact same time. 50 phone torches in perfect sync. Someone yelled "should've used a Mayfield switchboard!" The boss nearly choked on his beer. Fastest fault-finding this crew has ever done! 🔦😂</p>
+            </div>
+            
+            <div class="section">
+                <h4>🎁 Thanks Legends</h4>
+                <p>Massive thanks to everyone who makes Mayfield what it is - from the workshop floor to the project managers, the engineers to the admin legends. 80 years of keeping Australia's power on wouldn't happen without every single one of you. Have a safe Christmas, don't overload your powerboards at home, and we'll see you charged up and ready in 2025! ⚡💪</p>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Tagline (optional)</label>
-        <input type="text" id="tagline" placeholder="e.g. Switch On with Mayfield">
-    </div>
-</div>
-
-<div class="section-box">
-    <h3>📷 Photos</h3>
-    
-    <input type="file" id="photoInput" accept="image/*" multiple style="display:none">
-    <button type="button" class="upload-btn" onclick="document.getElementById('photoInput').click()">
-        📱 Select Photos
-    </button>
-    
-    <div class="photo-thumbs">
-        <div class="photo-thumb" id="t0"><span class="num">1</span></div>
-        <div class="photo-thumb" id="t1"><span class="num">2</span></div>
-        <div class="photo-thumb" id="t2"><span class="num">3</span></div>
-        <div class="photo-thumb" id="t3"><span class="num">4</span></div>
-        <div class="photo-thumb" id="t4"><span class="num">5</span></div>
-    </div>
-    
-    <div class="status-text" id="status"></div>
-</div>
-
-<div class="section-box">
-    <h3>💬 Christmas Message</h3>
-    <div class="form-group">
-        <textarea id="mainMessage" placeholder="e.g. Merry Christmas from everyone at Mayfield! Here's to 2025!"></textarea>
-    </div>
-</div>
-
-<div class="section-box">
-    <h3>👥 Who's In The Photos</h3>
-    <div class="form-group">
-        <textarea id="whoIsHere" placeholder="e.g. Ben from fabrication, Tommy the supervisor, Karen from accounts..."></textarea>
-    </div>
-</div>
-
-<div class="section-box">
-    <h3>📖 The Story</h3>
-    <div class="form-group">
-        <textarea id="theStory" placeholder="e.g. First time the whole crew got together since 2019..."></textarea>
-    </div>
-</div>
-
-<div class="section-box">
-    <h3>⭐ Best Moment</h3>
-    <div class="form-group">
-        <textarea id="bestMoment" placeholder="e.g. When Dave did karaoke to Working Class Man..."></textarea>
-    </div>
-</div>
-
-<div class="section-box">
-    <h3>🎁 Special Thanks</h3>
-    <div class="form-group">
-        <textarea id="thanks" placeholder="e.g. Thanks to everyone who made it a great night!"></textarea>
-    </div>
-</div>
-
-<div class="section-box">
-    <button class="generate-btn" id="genBtn" onclick="generate()">🎄 Generate iTabs</button>
-    <div class="result-msg" id="result"></div>
-</div>
-
-<div class="footer">
-    <p>Made with ❤️ by <a href="https://itabs.ai">iTabs</a></p>
 </div>
 
 <script>
-    var IMGBB_KEY = '59cd5b2935b5b01bc744b5b0a1d26ee0';
-    var photoUrls = [];
-    var uploadsInProgress = 0;
-
-    document.getElementById('photoInput').onchange = function(e) {
-        var files = e.target.files;
-        if (!files || files.length === 0) return;
-        
-        photoUrls = [];
-        uploadsInProgress = 0;
-        
-        // Reset thumbs
-        for (var i = 0; i < 5; i++) {
-            document.getElementById('t' + i).innerHTML = '<span class="num">' + (i+1) + '</span>';
-            document.getElementById('t' + i).className = 'photo-thumb';
-        }
-        
-        var count = Math.min(files.length, 5);
-        document.getElementById('status').textContent = 'Uploading ' + count + ' photo(s)...';
-        document.getElementById('status').className = 'status-text';
-        
-        for (var i = 0; i < count; i++) {
-            uploadPhoto(files[i], i);
-        }
-    };
-
-    function uploadPhoto(file, idx) {
-        uploadsInProgress++;
-        
-        // Show spinner
-        document.getElementById('t' + idx).innerHTML = '<div class="spin"></div>';
-        
-        // Create form data with file directly
-        var fd = new FormData();
-        fd.append('key', IMGBB_KEY);
-        fd.append('image', file);
-        
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'https://api.imgbb.com/1/upload', true);
-        
-        xhr.onload = function() {
-            uploadsInProgress--;
-            
-            try {
-                var resp = JSON.parse(xhr.responseText);
-                if (resp.success && resp.data && resp.data.url) {
-                    photoUrls[idx] = resp.data.url;
-                    document.getElementById('t' + idx).innerHTML = '<img src="' + resp.data.url + '">';
-                    document.getElementById('t' + idx).className = 'photo-thumb has-photo';
-                } else {
-                    document.getElementById('t' + idx).innerHTML = '<span class="num">X</span>';
-                    document.getElementById('status').textContent = 'Upload failed';
-                    document.getElementById('status').className = 'status-text error';
-                }
-            } catch(err) {
-                document.getElementById('t' + idx).innerHTML = '<span class="num">X</span>';
-            }
-            
-            checkDone();
-        };
-        
-        xhr.onerror = function() {
-            uploadsInProgress--;
-            document.getElementById('t' + idx).innerHTML = '<span class="num">X</span>';
-            document.getElementById('status').textContent = 'Network error';
-            document.getElementById('status').className = 'status-text error';
-            checkDone();
-        };
-        
-        xhr.send(fd);
-    }
-
-    function checkDone() {
-        if (uploadsInProgress === 0) {
-            var good = photoUrls.filter(function(u) { return u; }).length;
-            if (good > 0) {
-                document.getElementById('status').textContent = '✅ ' + good + ' photo(s) ready!';
-                document.getElementById('status').className = 'status-text success';
-            }
-        }
-    }
-
-    function esc(t) {
-        if (!t) return '';
-        var d = document.createElement('div');
-        d.textContent = t;
-        return d.innerHTML;
-    }
-
-    function generate() {
-        var photos = photoUrls.filter(function(u) { return u; });
-        
-        if (photos.length === 0) {
-            document.getElementById('result').textContent = 'Please add at least one photo';
-            document.getElementById('result').className = 'result-msg show error';
-            return;
-        }
-        
-        if (uploadsInProgress > 0) {
-            document.getElementById('result').textContent = 'Wait for uploads to finish';
-            document.getElementById('result').className = 'result-msg show error';
-            return;
-        }
-        
-        var company = document.getElementById('companyName').value || 'Our Team';
-        var tagline = document.getElementById('tagline').value || '';
-        var msg = document.getElementById('mainMessage').value || 'Merry Christmas!';
-        var who = document.getElementById('whoIsHere').value || '';
-        var story = document.getElementById('theStory').value || '';
-        var best = document.getElementById('bestMoment').value || '';
-        var thx = document.getElementById('thanks').value || '';
-
-        var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + esc(company) + ' Christmas 2024</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:Poppins,sans-serif;background:linear-gradient(180deg,#e8f5e9,#f7f8fa);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}.card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.12);max-width:420px;width:100%}.slideshow{position:relative;width:100%;height:300px;background:#c41e3a;overflow:hidden}.slides{display:flex;height:100%;transition:transform .4s}.slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center}.slide img{max-width:100%;max-height:100%;object-fit:cover;width:100%}.dots{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:10px}.dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.4);cursor:pointer;border:2px solid #fff}.dot.on{background:#fff}.ibtn{position:absolute;bottom:18px;right:18px;width:54px;height:54px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.25);border:3px solid #1a5f2a}.content{padding:20px;text-align:center}.content h2{color:#1a1a1a;font-size:1.2em}.content p{color:#718096;font-size:.85em}.popup{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:15px}.popup.on{display:flex}.box{background:#fff;border-radius:24px;max-width:420px;width:100%;max-height:85vh;overflow-y:auto}.head{background:#c41e3a;color:#fff;padding:26px 22px;text-align:center;position:relative}.head h3{font-size:1.3em}.close{position:absolute;top:14px;right:14px;width:34px;height:34px;background:rgba(255,255,255,.2);border:none;border-radius:50%;color:#fff;font-size:22px;cursor:pointer}.body{padding:24px}.msgbox{background:#e8f5e9;border-left:4px solid #1a5f2a;padding:18px;margin-bottom:20px;border-radius:0 12px 12px 0}.msgbox p{font-size:1.1em;font-weight:600;color:#1a1a1a}.sec{margin-bottom:20px}.sec h4{color:#1a5f2a;font-size:1em;margin-bottom:8px}.sec p{color:#4a5568;line-height:1.6}.foot{text-align:center;padding:15px;font-size:.8em;color:#718096;border-top:1px solid #eee}.foot a{color:#1a5f2a;text-decoration:none}</style></head><body><div class="card"><div class="slideshow" id="ss"><div class="slides" id="sl">';
-        
-        for (var i = 0; i < photos.length; i++) {
-            html += '<div class="slide"><img src="' + photos[i] + '"></div>';
-        }
-        
-        html += '</div><div class="dots">';
-        for (var i = 0; i < photos.length; i++) {
-            html += '<div class="dot' + (i===0?' on':'') + '" onclick="go(' + i + ')"></div>';
-        }
-        html += '</div><div class="ibtn" onclick="openP()">🎄</div></div><div class="content"><h2>' + esc(company) + ' Christmas 2024! 🎄</h2><p>Swipe • Tap 🎄 for stories</p></div><div class="foot">Made with 🎄 <a href="https://itabs.ai">iTabs</a>' + (tagline ? ' | ' + esc(tagline) : '') + '</div></div>';
-        
-        html += '<div class="popup" id="pop" onclick="closeP(event)"><div class="box" onclick="event.stopPropagation()"><div class="head"><button class="close" onclick="closeP()">×</button><h3>' + esc(company) + ' Christmas 🎄</h3></div><div class="body"><div class="msgbox"><p>' + esc(msg) + '</p></div>';
-        
-        if (who) html += '<div class="sec"><h4>👥 Who\'s Here</h4><p>' + esc(who) + '</p></div>';
-        if (story) html += '<div class="sec"><h4>📖 The Story</h4><p>' + esc(story) + '</p></div>';
-        if (best) html += '<div class="sec"><h4>⭐ Best Moment</h4><p>' + esc(best) + '</p></div>';
-        if (thx) html += '<div class="sec"><h4>🎁 Thanks</h4><p>' + esc(thx) + '</p></div>';
-        
-        html += '</div></div></div>';
-        
-        html += '<script>var c=0,n=' + photos.length + ';function go(i){c=i;document.getElementById("sl").style.transform="translateX(-"+c*100+"%)";var d=document.querySelectorAll(".dot");for(var j=0;j<d.length;j++)d[j].className=j===c?"dot on":"dot"}function next(){c=(c+1)%n;go(c)}function openP(){document.getElementById("pop").className="popup on"}function closeP(e){if(!e||e.target.id==="pop"||e.target.className.indexOf("close")>-1)document.getElementById("pop").className="popup"}setInterval(next,3500);var sx=0;document.getElementById("ss").ontouchstart=function(e){sx=e.touches[0].clientX};document.getElementById("ss").ontouchend=function(e){var d=sx-e.changedTouches[0].clientX;if(Math.abs(d)>50){d>0?next():go((c-1+n)%n)}}<\/script></body></html>';
-
-        var blob = new Blob([html], {type: 'text/html'});
-        var url = URL.createObjectURL(blob);
-        var a = document.createElement('a');
-        a.href = url;
-        a.download = 'itabs-christmas.html';
-        a.click();
-        
-        document.getElementById('result').textContent = '✅ Downloaded!';
-        document.getElementById('result').className = 'result-msg show success';
-    }
+    let cur=0,intv;
+    const total=4;
+    function goTo(i){cur=i;document.getElementById("track").style.transform="translateX(-"+cur*100+"%)";document.querySelectorAll(".dot").forEach((d,j)=>d.classList.toggle("active",j===cur))}
+    function next(){cur=(cur+1)%total;goTo(cur)}
+    function startAuto(){intv=setInterval(next,3500)}
+    function stopAuto(){clearInterval(intv)}
+    function openPopup(){document.getElementById("popup").classList.add("active");document.body.style.overflow="hidden";stopAuto()}
+    function closePopup(e){if(!e||e.target.id==="popup"||e.target.classList.contains("close-btn")){document.getElementById("popup").classList.remove("active");document.body.style.overflow="";startAuto()}}
+    document.addEventListener("keydown",e=>{if(e.key==="Escape")closePopup()});
+    let sx=0;
+    document.getElementById("ss").addEventListener("touchstart",e=>sx=e.changedTouches[0].screenX);
+    document.getElementById("ss").addEventListener("touchend",e=>{const d=sx-e.changedTouches[0].screenX;if(Math.abs(d)>50)d>0?next():goTo((cur-1+total)%total)});
+    (function(){const c=document.getElementById("snow");for(let i=0;i<15;i++){const s=document.createElement("div");s.className="snowflake";s.textContent="❄";s.style.left=Math.random()*100+"vw";s.style.animationDuration=Math.random()*6+6+"s";s.style.animationDelay=Math.random()*6+"s";s.style.fontSize=Math.random()*.8+.6+"rem";c.appendChild(s)}})();
+    startAuto();
 </script>
 ```
 
