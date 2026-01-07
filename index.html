@@ -1,475 +1,139 @@
-<!DOCTYPE html>
+<!-- iTabs Code for Kickstarter Campaign -->
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>First Lady of Kenya Interview - Good Life TV</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-```
-    body {
-        font-family: 'Source Sans Pro', sans-serif;
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-    
-    .itabs-container {
-        width: 100%;
-        max-width: 420px;
-        background: #ffffff;
-        border-radius: 20px;
-        overflow: hidden;
-        box-shadow: 0 25px 80px rgba(0,0,0,0.4);
-    }
-    
-    /* Slideshow */
-    .slideshow-wrapper {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16/10;
-        overflow: hidden;
-        background: #000;
-    }
-    
-    .slide {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        transition: opacity 0.8s ease-in-out;
-    }
-    
-    .slide.active {
-        opacity: 1;
-    }
-    
-    .slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    
-    /* Navigation dots */
-    .slide-dots {
-        position: absolute;
-        bottom: 15px;
-        left: 50%;
-        transform: translateX(-50%);
-        display: flex;
-        gap: 8px;
-        z-index: 10;
-    }
-    
-    .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: rgba(255,255,255,0.5);
-        cursor: pointer;
-        transition: all 0.3s;
-    }
-    
-    .dot.active {
-        background: #fff;
-        transform: scale(1.2);
-    }
-    
-    /* The "i" button */
-    .itabs-button {
-        position: absolute;
-        bottom: 50px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        background: linear-gradient(135deg, #c9a227 0%, #d4af37 50%, #f0c75e 100%);
-        color: #1a1a2e;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: 'Playfair Display', serif;
-        font-weight: 700;
-        font-size: 26px;
-        cursor: pointer;
-        box-shadow: 0 4px 20px rgba(201,162,39,0.5);
-        border: 3px solid rgba(255,255,255,0.9);
-        z-index: 20;
-        transition: all 0.3s ease;
-    }
-    
-    .itabs-button:hover {
-        transform: scale(1.1);
-        box-shadow: 0 6px 30px rgba(201,162,39,0.7);
-    }
-    
-    /* Content area below slideshow */
-    .content-area {
-        padding: 25px;
-        text-align: center;
-        background: linear-gradient(180deg, #fff 0%, #f8f6f0 100%);
-    }
-    
-    .content-area h3 {
-        font-family: 'Playfair Display', serif;
-        font-size: 1.4em;
-        color: #1a1a2e;
-        margin-bottom: 8px;
-        font-weight: 700;
-    }
-    
-    .content-area .subtitle {
-        color: #c9a227;
-        font-size: 0.95em;
-        font-weight: 600;
-        margin-bottom: 12px;
-    }
-    
-    .content-area p {
-        color: #555;
-        font-size: 0.95em;
-        line-height: 1.5;
-    }
-    
-    /* Watch button */
-    .watch-button {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 14px 35px;
-        background: linear-gradient(135deg, #c9a227 0%, #d4af37 100%);
-        color: #1a1a2e;
-        text-decoration: none;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 1em;
-        box-shadow: 0 4px 15px rgba(201,162,39,0.4);
-        transition: all 0.3s ease;
-    }
-    
-    .watch-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(201,162,39,0.5);
-    }
-    
-    /* Popup overlay */
-    .popup-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.85);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-        padding: 20px;
-    }
-    
-    .popup-content {
-        background: #fff;
-        border-radius: 20px;
-        width: 100%;
-        max-width: 400px;
-        max-height: 85vh;
-        overflow: hidden;
-        position: relative;
-        box-shadow: 0 25px 80px rgba(0,0,0,0.5);
-    }
-    
-    .popup-header {
-        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-        padding: 25px 20px;
-        text-align: center;
-        position: relative;
-    }
-    
-    .popup-header h2 {
-        font-family: 'Playfair Display', serif;
-        color: #fff;
-        font-size: 1.4em;
-        margin-bottom: 5px;
-    }
-    
-    .popup-header .subtitle {
-        color: #c9a227;
-        font-size: 0.9em;
-        font-weight: 600;
-    }
-    
-    .close-btn {
-        position: absolute;
-        top: 15px;
-        right: 15px;
-        width: 35px;
-        height: 35px;
-        background: rgba(255,255,255,0.15);
-        border: none;
-        border-radius: 50%;
-        color: #fff;
-        font-size: 24px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.3s;
-    }
-    
-    .close-btn:hover {
-        background: rgba(255,255,255,0.25);
-    }
-    
-    .popup-body {
-        padding: 0;
-        max-height: 50vh;
-        overflow-y: auto;
-    }
-    
-    .info-section {
-        padding: 20px 25px;
-        border-bottom: 1px solid #eee;
-    }
-    
-    .info-section:last-child {
-        border-bottom: none;
-    }
-    
-    .info-section h4 {
-        font-family: 'Playfair Display', serif;
-        color: #1a1a2e;
-        font-size: 1.1em;
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    
-    .info-section h4 span {
-        font-size: 1.2em;
-    }
-    
-    .info-section p {
-        color: #555;
-        font-size: 0.95em;
-        line-height: 1.6;
-    }
-    
-    .popup-footer {
-        padding: 20px;
-        background: #f8f6f0;
-    }
-    
-    .popup-footer a {
-        display: block;
-        width: 100%;
-        padding: 16px;
-        background: linear-gradient(135deg, #c9a227 0%, #d4af37 100%);
-        color: #1a1a2e;
-        text-decoration: none;
-        border-radius: 30px;
-        font-weight: 600;
-        font-size: 1.05em;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(201,162,39,0.4);
-        transition: all 0.3s ease;
-    }
-    
-    .popup-footer a:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 6px 25px rgba(201,162,39,0.5);
-    }
-    
-    /* iTabs branding */
-    .itabs-credit {
-        text-align: center;
-        padding: 15px;
-        background: #f8f6f0;
-        border-top: 1px solid #eee;
-        font-size: 0.85em;
-        color: #888;
-    }
-    
-    .itabs-credit a {
-        color: #c9a227;
-        text-decoration: none;
-        font-weight: 600;
-    }
-</style>
-```
-
-</head>
-<body>
-
-<div class="itabs-container">
-    <!-- Slideshow -->
-    <div class="slideshow-wrapper">
-        <div class="slide active">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1692826973798-01WYUYL4YDVIFLTHD5NT/Thumbnails+GLTV+%2887%29.png" alt="First Lady of Kenya Mama Rachel Ruto">
+<div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.1); max-width: 500px; margin: 20px auto;">
+    <div style="position: relative; width: 100%; height: 350px; overflow: hidden; background: linear-gradient(135deg, #05CE78 0%, #00A862 100%);">
+        <div style="position: relative; width: 100%; height: 100%; overflow: hidden;">
+            <div id="itabsTrack" style="display: flex; transition: transform 0.4s ease; height: 100%;">
+        <div style="min-width: 100%; height: 100%;">
+            <img src="https://i.ibb.co/rRR5Wbwt/sciving1.jpg" alt="Help us build the app for Affordable Student Housing 1" style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ffffff; font-weight: bold; font-size: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); padding: 10px; z-index: 10; text-align: center; width: 90%;">Live now on Kickstarter</div>
         </div>
-        <div class="slide">
-            <img src="https://images.squarespace-cdn.com/content/v1/5e5423b9a37dc00ee8638a87/1583973953225-5UK8EZRY4BOE6JW0KU04/GL_LogoVariation.png" alt="Good Life TV Logo">
+        <div style="min-width: 100%; height: 100%;">
+            <img src="https://i.ibb.co/VF6s63T/sci7.jpg" alt="Help us build the app for Affordable Student Housing 2" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
-        <div class="slide">
-            <img src="https://images.unsplash.com/photo-1589519160732-57fc498494f8?w=800" alt="Kenya landscape">
+        <div style="min-width: 100%; height: 100%;">
+            <img src="https://i.ibb.co/9kvGygsg/sciving3.jpg" alt="Help us build the app for Affordable Student Housing 3" style="width: 100%; height: 100%; object-fit: cover;">
         </div>
-
-```
-    <!-- Navigation dots -->
-    <div class="slide-dots">
-        <div class="dot active" onclick="goToSlide(0)"></div>
-        <div class="dot" onclick="goToSlide(1)"></div>
-        <div class="dot" onclick="goToSlide(2)"></div>
+        <div style="min-width: 100%; height: 100%;">
+            <img src="https://i.ibb.co/dwmyhHpL/sciving5.avif" alt="Help us build the app for Affordable Student Housing 4" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div style="min-width: 100%; height: 100%;">
+            <img src="https://i.ibb.co/RkR6szvM/sciving2.jpg" alt="Help us build the app for Affordable Student Housing 5" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+            </div>
+        </div>
+        <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; z-index: 15;">
+        <div class="itabs-dot" data-slide="0" style="width: 10px; height: 10px; border-radius: 50%; background: white; cursor: pointer; transition: all 0.3s; border: 2px solid white;"></div>
+        <div class="itabs-dot" data-slide="1" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; border: 2px solid white;"></div>
+        <div class="itabs-dot" data-slide="2" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; border: 2px solid white;"></div>
+        <div class="itabs-dot" data-slide="3" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; border: 2px solid white;"></div>
+        <div class="itabs-dot" data-slide="4" style="width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.5); cursor: pointer; transition: all 0.3s; border: 2px solid white;"></div>
+        </div>
+        <div id="itabsCounter" style="position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; padding: 5px 12px; border-radius: 15px; font-size: 14px; font-weight: bold; z-index: 15;">1/5</div>
+        <div style="position: absolute; top: 20px; right: 20px; width: 45px; height: 45px; background: rgba(255,255,255,0.95); color: #05CE78; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 24px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.2); border: 3px solid white; z-index: 20;" onclick="document.getElementById('itabsPopup').style.display='flex'">i</div>
     </div>
-    
-    <!-- The "i" button -->
-    <div class="itabs-button" onclick="openPopup()">i</div>
-</div>
-
-<!-- Content below slideshow -->
-<div class="content-area">
-    <h3>First Lady of Kenya</h3>
-    <div class="subtitle">Mama Rachel Ruto</div>
-    <p>Tap the golden "i" for the full story behind this extraordinary interview</p>
-    <a href="https://youtu.be/OP22BzU6bag" class="watch-button" target="_blank">▶ Watch Interview</a>
-</div>
-
-<!-- iTabs credit -->
-<div class="itabs-credit">
-    Made with ❤️ by <a href="https://itabs.ai" target="_blank">iTabs</a>
-</div>
-```
-
-</div>
-
-<!-- Popup -->
-
-<div class="popup-overlay" id="popup" onclick="closePopup(event)">
-    <div class="popup-content" onclick="event.stopPropagation()">
-        <div class="popup-header">
-            <button class="close-btn" onclick="closePopupBtn()">&times;</button>
-            <h2>First Lady of Kenya Interview</h2>
-            <div class="subtitle">Mama Rachel Ruto × Dean Wilson</div>
+    <div style="padding: 25px; text-align: center; position: relative;">
+        <!-- iTabs Button (Bottom Right) -->
+        <div style="position: absolute; bottom: 12px; right: 15px;">
+            <div onclick="document.getElementById('itabsInfoPopup').style.display='flex'" onmouseenter="this.querySelector('.itabs-tooltip').style.opacity='1'" onmouseleave="this.querySelector('.itabs-tooltip').style.opacity='0'" style="width: 35px; height: 35px; background: rgba(255, 255, 255, 0.95); border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); border: 2px solid #05CE78; transition: all 0.3s ease; cursor: pointer; position: relative;">
+                <div class="itabs-tooltip" style="position: absolute; background: rgba(0, 0, 0, 0.9); color: white; padding: 8px 12px; border-radius: 6px; font-size: 12px; white-space: nowrap; pointer-events: none; opacity: 0; transition: opacity 0.3s; bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-5px); z-index: 1000;">Create your own iTabs</div>
+                <div style="color: #05CE78; font-size: 14px; font-weight: bold; line-height: 1; margin-bottom: 1px;">i</div>
+                <div style="color: #05CE78; font-size: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.3px; line-height: 1;">iTabs</div>
+            </div>
         </div>
-
-```
-    <div class="popup-body">
-        <div class="info-section">
-            <h4><span>🌍</span> Who is Mama Rachel Ruto?</h4>
-            <p>The First Lady of Kenya since 2022, Mama Rachel Ruto is a powerful advocate for faith, family, and community development. She brings decades of experience in grassroots empowerment and women's initiatives across East Africa.</p>
-        </div>
-        
-        <div class="info-section">
-            <h4><span>🎬</span> Why This Interview Matters</h4>
-            <p>Dean Wilson was personally invited to interview the First Lady at a conference in Southern California. This rare, intimate conversation reveals her deep faith in God and her message: "With God, all things are possible."</p>
-        </div>
-        
-        <div class="info-section">
-            <h4><span>✨</span> What You'll Discover</h4>
-            <p>An inspiring conversation about faith, leadership, and hope. Mama Rachel shares how her spiritual foundation shapes her role as First Lady and her vision for Kenya's future. A truly special moment captured by Good Life TV.</p>
-        </div>
-        
-        <div class="info-section">
-            <h4><span>📺</span> About Good Life TV</h4>
-            <p>Good Life TV with Dean Wilson celebrates the good things in life — friendship, love, hope, and inspiration. With 30+ years of broadcast experience, Dean brings you interviews with extraordinary people making a positive impact.</p>
-        </div>
-    </div>
-    
-    <div class="popup-footer">
-        <a href="https://youtu.be/OP22BzU6bag" target="_blank">Watch the Full Interview →</a>
+        <h3 style="font-size: 1.3em; color: #2d3748; margin-bottom: 10px; font-weight: 600;">Help us build the app for Affordable Student Housing</h3>
+        <p style="color: #718096; font-size: 1em; line-height: 1.6;">Swipe to see more • Click i for details</p>
     </div>
 </div>
-```
 
+<div id="itabsPopup" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; padding: 20px;">
+    <div style="position: relative; background-color: white; border-radius: 20px; width: 90%; max-width: 600px; max-height: 80vh; box-shadow: 0 20px 60px rgba(0,0,0,0.4); overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #05CE78 0%, #00A862 100%); color: white; padding: 30px; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; font-size: 1.8em;">Help us build the app for Affordable Student Housing</h3>
+            <button onclick="document.getElementById('itabsPopup').style.display='none'" style="color: white; font-size: 40px; font-weight: bold; cursor: pointer; background: none; border: none; width: 40px; height: 40px;">&times;</button>
+        </div>
+        <div style="padding: 35px; max-height: calc(80vh - 120px); overflow-y: auto;">
+            <h4 style="color: #05CE78; font-size: 1.4em; margin-bottom: 15px;">What is it?</h4>
+            <p style="color: #4a5568; font-size: 1.05em; line-height: 1.8; margin-bottom: 15px;">This Kickstarter campaign aims to fund the development of a mobile application dedicated to connecting students with affordable housing options. The app will streamline the search process and provide a centralized platform for finding suitable and budget-friendly accommodations.</p>
+
+            <h4 style="color: #05CE78; font-size: 1.4em; margin-bottom: 15px; margin-top: 25px;">Why back this?</h4>
+            <p style="color: #4a5568; font-size: 1.05em; line-height: 1.8; margin-bottom: 15px;">Backing this project helps students overcome the financial burden of expensive housing, enabling them to focus on their studies and overall well-being. You'll be contributing to a solution that directly addresses a critical need for students, making education more accessible and affordable.</p>
+
+            <h4 style="color: #05CE78; font-size: 1.4em; margin-bottom: 15px; margin-top: 25px;">How does it work?</h4>
+            <p style="color: #4a5568; font-size: 1.05em; line-height: 1.8; margin-bottom: 15px;">The campaign seeks funding to build the app's features, including search filters, property listings, and communication tools. Once developed, students can use the app to browse available housing, connect with landlords, and find roommates, all within a trusted and verified environment.</p>
+
+            <h4 style="color: #05CE78; font-size: 1.4em; margin-bottom: 15px; margin-top: 25px;">What makes it special?</h4>
+            <p style="color: #4a5568; font-size: 1.05em; line-height: 1.8; margin-bottom: 15px;">Unlike general rental platforms, this app focuses specifically on the needs and budgets of students. It aims to create a safe and reliable ecosystem with features designed for the student demographic, addressing a niche market often overlooked by larger platforms.</p>
+
+            <a href="https://www.kickstarter.com/projects/sciving/help-us-build-the-app-for-affordable-student-housing?ref=discovery_category&term=apps&total_hits=407&category_id=28" target="_blank" style="display: block; margin: 25px 0; padding: 15px; background: #05CE78; color: white; text-align: center; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 1.1em;">Back This Project</a>
+        </div>
+    </div>
+</div>
+
+<!-- iTabs Info Popup -->
+<div id="itabsInfoPopup" style="display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8); align-items: center; justify-content: center; padding: 20px;">
+    <div style="position: relative; background-color: white; border-radius: 20px; width: 90%; max-width: 500px; box-shadow: 0 20px 60px rgba(0,0,0,0.4); overflow: hidden;">
+        <div style="background: linear-gradient(135deg, #05CE78 0%, #00A862 100%); color: white; padding: 25px; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; font-size: 1.5em;">✨ This uses iTabs</h3>
+            <button onclick="document.getElementById('itabsInfoPopup').style.display='none'" style="color: white; font-size: 35px; font-weight: bold; cursor: pointer; background: none; border: none; width: 35px; height: 35px;">&times;</button>
+        </div>
+        <div style="padding: 30px;">
+            <p style="color: #4a5568; font-size: 1.05em; line-height: 1.8; margin-bottom: 25px;">This interactive display was created with iTabs - making campaigns easy to understand with clickable explanations.</p>
+            <p style="color: #4a5568; font-size: 1.05em; line-height: 1.8; margin-bottom: 25px;"><strong>Want to create iTabs for your campaign?</strong></p>
+            <a href="https://itabsgenerator.gumroad.com/l/kickstarter" target="_blank" style="display: block; width: 100%; padding: 15px; background: linear-gradient(135deg, #05CE78 0%, #00A862 100%); color: white; border: none; border-radius: 12px; font-size: 1.1em; font-weight: bold; cursor: pointer; box-shadow: 0 4px 15px rgba(5,206,120,0.3); text-align: center; text-decoration: none;">Create Your Own iTabs →</a>
+        </div>
+    </div>
 </div>
 
 <script>
-    let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let slideInterval;
-    
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.classList.remove('active');
-            dots[i].classList.remove('active');
-        });
-        slides[index].classList.add('active');
-        dots[index].classList.add('active');
-        currentSlide = index;
-    }
-    
-    function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-    }
-    
-    function goToSlide(index) {
-        clearInterval(slideInterval);
-        showSlide(index);
-        startSlideshow();
-    }
-    
-    function startSlideshow() {
-        slideInterval = setInterval(nextSlide, 4000);
-    }
-    
-    // Touch/swipe support
-    let touchStartX = 0;
-    const wrapper = document.querySelector('.slideshow-wrapper');
-    
-    wrapper.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-    });
-    
-    wrapper.addEventListener('touchend', (e) => {
-        const touchEndX = e.changedTouches[0].clientX;
-        const diff = touchStartX - touchEndX;
-        
-        if (Math.abs(diff) > 50) {
-            clearInterval(slideInterval);
-            if (diff > 0) {
-                currentSlide = (currentSlide + 1) % slides.length;
-            } else {
-                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-            }
-            showSlide(currentSlide);
-            startSlideshow();
-        }
-    });
-    
-    // Popup functions
-    function openPopup() {
-        document.getElementById('popup').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function closePopup(e) {
-        if (e.target === document.getElementById('popup')) {
-            document.getElementById('popup').style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    }
-    
-    function closePopupBtn() {
-        document.getElementById('popup').style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    
-    // Start slideshow
-    startSlideshow();
-</script>
+var itabsCurrentSlide = 0;
+var itabsTotalSlides = 5;
 
-</body>
-</html>
+function itabsUpdateCarousel() {
+    var track = document.getElementById('itabsTrack');
+    var counter = document.getElementById('itabsCounter');
+    var dots = document.querySelectorAll('.itabs-dot');
+    if (track) track.style.transform = 'translateX(-' + (itabsCurrentSlide * 100) + '%)';
+    if (counter) counter.textContent = (itabsCurrentSlide + 1) + '/' + itabsTotalSlides;
+    dots.forEach(function(dot, i) {
+        dot.style.background = i === itabsCurrentSlide ? 'white' : 'rgba(255,255,255,0.5)';
+    });
+}
+
+var trackEl = document.getElementById('itabsTrack');
+var touchStartX = 0;
+if (trackEl) {
+    trackEl.addEventListener('touchstart', function(e) { touchStartX = e.changedTouches[0].screenX; });
+    trackEl.addEventListener('touchend', function(e) {
+        var touchEndX = e.changedTouches[0].screenX;
+        if (touchEndX < touchStartX - 50) {
+            itabsCurrentSlide++;
+            if (itabsCurrentSlide >= itabsTotalSlides) itabsCurrentSlide = 0;
+            itabsUpdateCarousel();
+        } else if (touchEndX > touchStartX + 50) {
+            itabsCurrentSlide--;
+            if (itabsCurrentSlide < 0) itabsCurrentSlide = itabsTotalSlides - 1;
+            itabsUpdateCarousel();
+        }
+    });
+}
+document.querySelectorAll('.itabs-dot').forEach(function(dot, i) {
+    dot.addEventListener('click', function() {
+        itabsCurrentSlide = i;
+        itabsUpdateCarousel();
+    });
+});
+document.getElementById('itabsPopup').addEventListener('click', function(e) {
+    if (e.target.id === 'itabsPopup') this.style.display = 'none';
+});
+document.getElementById('itabsInfoPopup').addEventListener('click', function(e) {
+    if (e.target.id === 'itabsInfoPopup') this.style.display = 'none';
+});
+
+// Auto-advance slideshow
+setInterval(function() {
+    itabsCurrentSlide++;
+    if (itabsCurrentSlide >= itabsTotalSlides) itabsCurrentSlide = 0;
+    itabsUpdateCarousel();
+}, 3000);
+</script>
